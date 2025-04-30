@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<h1>Articles</h1>
+
+{% for year, pages in section.pages | group_by(attribute="year") %}
+<div class="articles-group">
+  <div class="articles-year">{{ year }}</div>
+  <ul class="articles-list">
+    {% for page in pages %}
+    <li class="articles-item">
+      <a href="{{ page.permalink | safe }}">
+        <span class="articles-item-title">{{ page.title }}</span>
+        <span class="articles-day">{{ page.date | date(format="%m/%d") }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endfor %}
+
+{% endblock content %}

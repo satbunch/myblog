@@ -1,0 +1,53 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<article>
+  <header class="entry-header">
+    <h1 class="entry-title">
+      {{ page.title }}
+    </h1>
+    <div class="entry-meta">
+      <p class="entry-meta-item">
+        🗓 {{ page.date | date(format="%Y-%m-%d") }}
+      </p>
+
+      <p class="entry-meta-item">
+        🏷
+        {% for key, value in page.taxonomies %}
+        {% if key == "tags" %}
+        {% for tag in value %}
+        {# vscode-languageserver try to format `kind=" tags"`, so we use single quote. #}
+        <span class="tag"><a href="{{ get_taxonomy_url(kind='tags', name=tag) }}">{{ tag }}</a></span>
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+      </p>
+    </div>
+  </header>
+
+  <aside class="entry-toc">
+    <nav>
+      <ul class="entry-toc-toplevel-list">
+        {% for h1 in page.toc %}
+        <li>
+          <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
+          {% if h1.children %}
+          <ul>
+            {% for h2 in h1.children %}
+            <li>
+              <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="entry-content">
+    {{ page.content | safe }}
+  </div>
+</article>
+{% endblock content %}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  {% include "base/head.html" %}
+  <title>{{ config.title }}</title>
+</head>
+
+<body>
+  <div class="section">
+    <div class="content-container">
+      {% include "base/header.html" %}
+      <main class="blog-main">
+        {% block content %} {% endblock %}
+      </main>
+    </div>
+  </div>
+</body>
+
+</html>
