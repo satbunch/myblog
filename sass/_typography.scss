@@ -1,0 +1,15 @@
+@import 'variables';
+
+html {
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  color: $color-text;
+  font-family: $fonts;
+}
