@@ -17,13 +17,13 @@ $s-5: $s-4 /$ratio;
 
 // Colors
 $color-p-1: hsl(211deg, 53%, 11%);
-$color-p-2: #1F1F28;
+$color-p-2: hsl(240deg, 12%, 13%);
 $color-p-3: hsl(212deg, 29%, 36%);
 $color-p-4: hsl(214deg, 23%, 56%);
 $color-p-5: hsl(75deg, 6%, 87%);
 
-$color-background: $color_p_2;
-$color-text: #CEC9AF;
+$color-background: $color-p-2;
+$color-text: hsl(50deg, 24%, 74%);
 $color-codeblock-background: $color-p-3;
 $color-inline-code-background: $color-p-3;
 
