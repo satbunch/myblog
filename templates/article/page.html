@@ -2,16 +2,16 @@
 
 {% block content %}
 <article>
-  <header class="entry-header">
-    <h1 class="entry-title">
+  <header class="article-header">
+    <h1 class="article-title">
       {{ page.title }}
     </h1>
-    <div class="entry-meta">
-      <p class="entry-meta-item">
+    <div class="article-meta">
+      <p class="article-meta-item">
         🗓 {{ page.date | date(format="%Y-%m-%d") }}
       </p>
 
-      <p class="entry-meta-item">
+      <p class="article-meta-item">
         🏷
         {% for key, value in page.taxonomies %}
         {% if key == "tags" %}
@@ -25,9 +25,9 @@
     </div>
   </header>
 
-  <aside class="entry-toc">
+  <aside class="article-toc">
     <nav>
-      <ul class="entry-toc-toplevel-list">
+      <ul class="article-toc-toplevel-list">
         {% for h1 in page.toc %}
         <li>
           <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
@@ -46,7 +46,7 @@
     </nav>
   </aside>
 
-  <div class="entry-content">
+  <div class="article-content">
     {{ page.content | safe }}
   </div>
 </article>

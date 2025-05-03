@@ -1,0 +1,35 @@
+@import "../variables.scss";
+
+.article-group {
+  display: flex;
+
+  .article-year {
+    font-size: 1.6em;
+    padding-top: 6px;
+    white-space: nowrap; // 年なので折り返しされたくない
+    @include dimmed;
+  }
+
+  .article-list {
+    list-style: none;
+    flex-grow: 1;
+    margin: 0;
+  }
+
+  .article-item {
+    border-bottom: 1px $color-p-3 dashed;
+
+    a {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 12px 0;
+    }
+  }
+
+  .article-day {
+    flex-shrink: 0;
+    margin-left: 1em;
+    @include dimmed;
+  }
+}

@@ -1,3 +1,3 @@
 +++
-redirect_to = "articles"
+redirect_to = "article"
 +++

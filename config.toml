@@ -18,9 +18,8 @@ highlight_code = true
 
 [extra]
 # Put all your custom variables here
-homepage = "Tech Blog" # author homepage
-subtitle = ""          # blog subtitle
-git_source = ""        # blog source code
-author = "satbunch"    # author name
-email = ""             # author email
-license = ""           # blog license
+
+[extra.author]
+name = "satbunch"
+github = "satbunch"
+twitter = "satbunch"
