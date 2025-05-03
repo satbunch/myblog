@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://satbunch.github.io/myblog/style.css" />
+
+  <title>Tech Life</title>
+</head>
+
+<body>
+  <div class="section">
+    <div class="content-container">
+      <header class="blog-header-container">
+  <div class="blog-logo">
+    <a href="https:&#x2F;&#x2F;satbunch.github.io&#x2F;myblog">Tech Life</a>
+  </div>
+  <div class="blog-nav">
+		<nav>
+			<ul>
+				<li><a href="https:&#x2F;&#x2F;satbunch.github.io&#x2F;myblog/article/">Articles</a></li>
+				<li><a href="https:&#x2F;&#x2F;satbunch.github.io&#x2F;myblog/tags/">Tags</a></li>
+				<li><a href="https:&#x2F;&#x2F;satbunch.github.io&#x2F;myblog/about/">About</a></li>
+				<li>
+					<a href="https://github.com/satbunch">
+						<img class="icon" src="https://satbunch.github.io/myblog/images/icon/github.svg" alt="Github">
+					</a>
+				</li>
+				<li>
+					<a href="https://twitter.com/satbunch">
+						<img class="icon" src="https://satbunch.github.io/myblog/images/icon/twitter.svg" alt="Twitter">
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+      <main class="blog-main">
+        
+<article>
+  <header class="article-header">
+    <h1 class="article-title">
+      systemctlについて
+    </h1>
+    <div class="article-meta">
+      <p class="article-meta-item">
+        🗓 2025-05-02
+      </p>
+
+      <p class="article-meta-item">
+        🏷
+        
+      </p>
+    </div>
+  </header>
+
+  <aside class="article-toc">
+    <nav>
+      <ul class="article-toc-toplevel-list">
+        
+        <li>
+          <a href="https://satbunch.github.io/myblog/article/about-systemctl/#systemctlkomando">systemctlコマンド</a>
+          
+          <ul>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/about-systemctl/#sabisuguan-li">サービス管理</a>
+            </li>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/about-systemctl/#sisutemuguan-li">システム管理</a>
+            </li>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/about-systemctl/#tagetutoguan-li">ターゲット管理</a>
+            </li>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/about-systemctl/#can-kao-saito">参考サイト</a>
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="article-content">
+    <h1 id="systemctlkomando">systemctlコマンド</h1>
+<p>systemctlコマンドはLinuxで使われるsystemdの管理ツール。実行中のサービスの起動や停止、再起動、ブート時に起動するサービスの有効化と無効化、利用可能なサービスのリスト表示、システムのステータス確認など、多くの管理タスクに使用する。</p>
+<p>systemdとは
+systemdはLinuxで利用されているデファクトスタンダードな初期化システムで、システムの起動時に各種サービスを立ち上げる役割を担う。</p>
+<h2 id="sabisuguan-li">サービス管理</h2>
+<h3 id="sabisunoqi-dong-toting-zhi">サービスの起動と停止</h3>
+<ul>
+<li>systemctl start &lt;サービス名&gt;：サービスを起動する</li>
+<li>systemctl stop &lt;サービス名&gt;：サービスを停止する</li>
+<li>systemctl restart &lt;サービス名&gt;：サービスを再起動する</li>
+<li>systemctl reload &lt;サービス名&gt;：サービスの設定を再読込する（サービスを停止させずに）。</li>
+</ul>
+<h3 id="sabisunozhuang-tai-que-ren">サービスの状態確認</h3>
+<ul>
+<li>systemctl status &lt;サービス&gt;：サービスの現在の状態を表示する。</li>
+</ul>
+<h3 id="sabisunoyou-xiao-hua-towu-xiao-hua">サービスの有効化と無効化</h3>
+<ul>
+<li>systemctl enable &lt;サービス&gt;：システム起動時にサービスを自動的に起動するように設定する。</li>
+<li>systemctl disable &lt;サービス&gt;：システム起動時にサービスを自動的に起動しないように設定する。</li>
+</ul>
+<h3 id="sabisunoyi-lan-biao-shi">サービスの一覧表示</h3>
+<ul>
+<li>systemctl list-units --type=service：現在のサービスの一覧を表示する。</li>
+</ul>
+<h2 id="sisutemuguan-li">システム管理</h2>
+<h3 id="sisutemunoting-zhi-tozai-qi-dong">システムの停止と再起動</h3>
+<ul>
+<li>systemctl halt：システムを停止しhalt状態にする。</li>
+<li>systemctl poweroff：システムを停止し電源を切断する。</li>
+<li>systemctl reboot：システムを再起動する。</li>
+</ul>
+<h3 id="sisutemunozhuang-kuang-que-ren">システムの状況確認</h3>
+<ul>
+<li>systemctl list-units：現在のすべてのユニット（サービス、マウントポイント、スワップ領域など）の一覧を表示する。</li>
+<li>systemctl get-default：システムのデフォルトのターゲット（起動時のシステム状態）を表示する。</li>
+</ul>
+<h2 id="tagetutoguan-li">ターゲット管理</h2>
+<ul>
+<li>systemctl isolote &lt;ターゲット名&gt;：指定したターゲットに切り替える。</li>
+<li>systemctl set-default &lt;ターゲット名&gt;：システム起動時のデフォルトのターゲットを設定する。</li>
+</ul>
+<h3 id="tagetutonituite">ターゲットについて</h3>
+<p>複数のユニット（サービスやマウントポイント、デバイスなど）をグループ化し、システムの特定の状態や実行モードを表現する役割を持つ。
+下記表が主なターゲット</p>
+<table><thead><tr><th>ターゲット</th><th>説明</th><th>ランレベル</th></tr></thead><tbody>
+<tr><td>poweroff.target</td><td>システム終了</td><td>0</td></tr>
+<tr><td>rescue.target</td><td>レスキュー（シングルモード）</td><td>1</td></tr>
+<tr><td>multi-user.target</td><td>CUIログイン</td><td>2,3,4</td></tr>
+<tr><td>graphical.target</td><td>グラフィカルログイン</td><td>5</td></tr>
+<tr><td>reboot.target</td><td>システム再起動</td><td>6</td></tr>
+</tbody></table>
+<h2 id="can-kao-saito">参考サイト</h2>
+<p><a href="https://itc.tokyo/linux/systemctl/">【完全版】systemctlのコマンド一覧｜実例付きで徹底解説</a></p>
+<p><a href="https://job-info.hateblo.jp/entry/2024/08/16/230855">Linuxのsystemctlとは - Web開発における知見共有系ページ</a></p>
+<p><a href="https://koanacademy.jp/systemd_target">systemdのターゲット(target) - KoANアカデミー</a></p>
+
+  </div>
+</article>
+
+      </main>
+    </div>
+  </div>
+</body>
+
+</html>
