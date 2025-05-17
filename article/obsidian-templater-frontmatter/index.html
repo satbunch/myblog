@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://satbunch.github.io/myblog/style.css" />
+
+  <title>Tech Life</title>
+</head>
+
+<body>
+  <div class="section">
+    <div class="content-container">
+      <header class="blog-header-container">
+  <div class="blog-logo">
+    <a href="https:&#x2F;&#x2F;satbunch.github.io&#x2F;myblog">Tech Life</a>
+  </div>
+  <div class="blog-nav">
+		<nav>
+			<ul>
+				<li><a href="https:&#x2F;&#x2F;satbunch.github.io&#x2F;myblog/article/">Articles</a></li>
+				<li><a href="https:&#x2F;&#x2F;satbunch.github.io&#x2F;myblog/tags/">Tags</a></li>
+				<li><a href="https:&#x2F;&#x2F;satbunch.github.io&#x2F;myblog/about/">About</a></li>
+				<li>
+					<a href="https://github.com/satbunch">
+						<img class="icon" src="https://satbunch.github.io/myblog/images/icon/github.svg" alt="Github">
+					</a>
+				</li>
+				<li>
+					<a href="https://twitter.com/satbunch">
+						<img class="icon" src="https://satbunch.github.io/myblog/images/icon/twitter.svg" alt="Twitter">
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+      <main class="blog-main">
+        
+<article>
+  <header class="article-header">
+    <h1 class="article-title">
+      Obsidianで新規ノートに自動でフロントマターを挿入する方法
+    </h1>
+    <div class="article-meta">
+      <p class="article-meta-item">
+        🗓 2025-05-16
+      </p>
+
+      <p class="article-meta-item">
+        🏷
+        
+      </p>
+    </div>
+  </header>
+
+  <aside class="article-toc">
+    <nav>
+      <ul class="article-toc-toplevel-list">
+        
+        <li>
+          <a href="https://satbunch.github.io/myblog/article/obsidian-templater-frontmatter/#obsidiandexin-gui-notonizi-dong-dehurontomatawocha-ru-surufang-fa-templaterhuo-yong">Obsidianで新規ノートに自動でフロントマターを挿入する方法【Templater活用】</a>
+          
+          <ul>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/obsidian-templater-frontmatter/#qian-ti-tiao-jian">前提条件</a>
+            </li>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/obsidian-templater-frontmatter/#shou-shun">手順</a>
+            </li>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/obsidian-templater-frontmatter/#owarini">おわりに</a>
+            </li>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/obsidian-templater-frontmatter/#ben-ji-shi-nituite">本記事について</a>
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="article-content">
+    <h1 id="obsidiandexin-gui-notonizi-dong-dehurontomatawocha-ru-surufang-fa-templaterhuo-yong">Obsidianで新規ノートに自動でフロントマターを挿入する方法【Templater活用】</h1>
+<p>Obsidianでノートを取っていると、「毎回フロントマターを書くのがちょっと面倒」と思ったことはありませんか？
+特にメモを整理したり、後で検索しやすくするために、<code>type</code> や <code>tags</code> を入れておきたいけど、毎回手動で書くのは意外と手間ですよね。</p>
+<p>そんなときに便利なのが、<strong>Templater</strong> というプラグインです。
+これを使えば、<code>Ctrl + N</code> でノートを新規作成したときに、自動で決まった内容（テンプレート）を差し込むことができます。</p>
+<hr />
+<h2 id="qian-ti-tiao-jian">前提条件</h2>
+<ul>
+<li>Obsidian がインストール済みであること</li>
+<li>コミュニティプラグインを有効化していること</li>
+</ul>
+<hr />
+<h2 id="shou-shun">手順</h2>
+<h3 id="1-templater-puraguinwoinsutorusuru">1. Templater プラグインをインストールする</h3>
+<ol>
+<li>左下の「設定（歯車アイコン）」をクリック</li>
+<li>「コミュニティプラグイン」 &gt; 「コミュニティプラグインを有効化」</li>
+<li>「プラグインを閲覧」で <code>Templater</code> を検索</li>
+<li><code>Templater</code> をインストールして有効化</li>
+</ol>
+<hr />
+<h3 id="2-tenpuretobao-cun-yong-huorudawozuo-ru">2. テンプレート保存用フォルダを作る</h3>
+<p>任意の場所にテンプレート保存用のフォルダを作成します。
+ここでは例として <code>99_Template</code> フォルダを使いますが、名前や場所は自由です。</p>
+<hr />
+<h3 id="3-tenpuretohuairuwozuo-cheng-suru">3. テンプレートファイルを作成する</h3>
+<p>テンプレートフォルダ内に <code>default.md</code> というファイルを作成し、以下のように記述します：</p>
+<pre data-lang="markdown" style="background-color:#2b303b;color:#c0c5ce;" class="language-markdown "><code class="language-markdown" data-lang="markdown"><span style="background-color:#4f5b66;color:#c0c5ce;">---
+</span><span>type: note
+</span><span>status: new
+</span><span>tags: []
+</span><span>date: &lt;% tp.date.now(&quot;YYYY-MM-DD&quot;) %&gt;
+</span><span>title: &lt;% tp.file.title %&gt;
+</span><span style="color:#8fa1b3;">---
+</span><span>
+</span><span style="color:#8fa1b3;"># &lt;% tp.file.title %&gt;
+</span></code></pre>
+<p>このテンプレートでは、以下の情報を自動で挿入するようにしています：</p>
+<ul>
+<li><code>type</code>: ノートの種類（固定）</li>
+<li><code>status</code>: ノートの状態（初期値として <code>new</code> を指定）</li>
+<li><code>tags</code>: タグ（空配列）</li>
+<li><code>date</code>: 作成日（現在の日付）</li>
+<li><code>title</code>: ファイル名（ノートタイトルを見出しにも使用）</li>
+</ul>
+<hr />
+<h3 id="4-templater-noshe-ding-wobian-geng-suru">4. Templater の設定を変更する</h3>
+<ol>
+<li>設定 &gt; 「Templater」のセクションを開く</li>
+<li>「Template folder location」：先ほど作成したフォルダを指定（例：<code>99_Template</code>）</li>
+<li>「Trigger Templater on new file creation」：✅ 有効化</li>
+<li>「Template to apply on new file creation」：<code>default.md</code> を指定</li>
+</ol>
+<hr />
+<h3 id="5-dong-zuo-que-ren-suru">5. 動作確認する</h3>
+<p><code>Ctrl + N</code> で新規ノートを作成してみましょう。
+以下のような内容が、自動でノートに入力されていれば成功です：</p>
+<pre data-lang="markdown" style="background-color:#2b303b;color:#c0c5ce;" class="language-markdown "><code class="language-markdown" data-lang="markdown"><span style="background-color:#4f5b66;color:#c0c5ce;">---
+</span><span>type: note
+</span><span>status: new
+</span><span>tags: []
+</span><span>date: 2025-05-16
+</span><span>title: 新規ノートのファイル名
+</span><span style="color:#8fa1b3;">---
+</span><span>
+</span><span style="color:#8fa1b3;"># 新規ノートのファイル名
+</span></code></pre>
+<hr />
+<h2 id="owarini">おわりに</h2>
+<p>Templater を使えば、ノート作成のたびに同じフロントマターを繰り返し入力する手間を省けます。
+これだけで、日々のノート整理やメタ情報の管理がずっとラクになります。</p>
+<p>今回は基本的な使い方に絞りましたが、Templater ではさらに条件分岐や入力フォームのようなことも可能です。
+今後はその応用例や、Dataviewと連携させる活用方法についても紹介していきますので、そちらもお楽しみに。</p>
+<hr />
+<h2 id="ben-ji-shi-nituite">本記事について</h2>
+<blockquote>
+<p>※本記事は、Obsidian初心者の著者が自身の学習と実践を元に、OpenAIのAIアシスタント（ChatGPT）と対話しながら共同で執筆した内容です。
+内容の正確性には十分配慮しておりますが、環境やバージョンによって挙動が異なる場合があります。ご利用の際はご自身の環境に応じてご確認ください。</p>
+</blockquote>
+
+  </div>
+</article>
+
+      </main>
+    </div>
+  </div>
+</body>
+
+</html>

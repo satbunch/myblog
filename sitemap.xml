@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://satbunch.github.io/myblog/</loc>
+    </url>
+    <url>
+        <loc>https://satbunch.github.io/myblog/article/</loc>
+    </url>
+    <url>
+        <loc>https://satbunch.github.io/myblog/article/about-systemctl/</loc>
+        <lastmod>2025-05-02</lastmod>
+    </url>
+    <url>
+        <loc>https://satbunch.github.io/myblog/article/emacs-install-for-ubuntu24-04/</loc>
+        <lastmod>2025-05-17</lastmod>
+    </url>
+    <url>
+        <loc>https://satbunch.github.io/myblog/article/obsidian-templater-frontmatter/</loc>
+        <lastmod>2025-05-16</lastmod>
+    </url>
+</urlset>

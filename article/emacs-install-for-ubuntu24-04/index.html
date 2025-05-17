@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://satbunch.github.io/myblog/style.css" />
+
+  <title>Tech Life</title>
+</head>
+
+<body>
+  <div class="section">
+    <div class="content-container">
+      <header class="blog-header-container">
+  <div class="blog-logo">
+    <a href="https:&#x2F;&#x2F;satbunch.github.io&#x2F;myblog">Tech Life</a>
+  </div>
+  <div class="blog-nav">
+		<nav>
+			<ul>
+				<li><a href="https:&#x2F;&#x2F;satbunch.github.io&#x2F;myblog/article/">Articles</a></li>
+				<li><a href="https:&#x2F;&#x2F;satbunch.github.io&#x2F;myblog/tags/">Tags</a></li>
+				<li><a href="https:&#x2F;&#x2F;satbunch.github.io&#x2F;myblog/about/">About</a></li>
+				<li>
+					<a href="https://github.com/satbunch">
+						<img class="icon" src="https://satbunch.github.io/myblog/images/icon/github.svg" alt="Github">
+					</a>
+				</li>
+				<li>
+					<a href="https://twitter.com/satbunch">
+						<img class="icon" src="https://satbunch.github.io/myblog/images/icon/twitter.svg" alt="Twitter">
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+      <main class="blog-main">
+        
+<article>
+  <header class="article-header">
+    <h1 class="article-title">
+      Ubuntu 24.04でEmacs最新版をソースからインストールする（ネイティブコンパイル対応）
+    </h1>
+    <div class="article-meta">
+      <p class="article-meta-item">
+        🗓 2025-05-17
+      </p>
+
+      <p class="article-meta-item">
+        🏷
+        
+      </p>
+    </div>
+  </header>
+
+  <aside class="article-toc">
+    <nav>
+      <ul class="article-toc-toplevel-list">
+        
+        <li>
+          <a href="https://satbunch.github.io/myblog/article/emacs-install-for-ubuntu24-04/#ubuntu-24-04deemacszui-xin-ban-wososukarainsutorusuru-neiteibukonpairudui-ying">Ubuntu 24.04でEmacs最新版をソースからインストールする（ネイティブコンパイル対応）</a>
+          
+          <ul>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/emacs-install-for-ubuntu24-04/#1-hazimeni-aptban-dehadamenano">1. はじめに（apt版ではダメなの？）</a>
+            </li>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/emacs-install-for-ubuntu24-04/#2-bi-yao-nakai-fa-turuwoinsutorusuru">2. 必要な開発ツールをインストールする</a>
+            </li>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/emacs-install-for-ubuntu24-04/#3-emacsnososukodoworu-shou-suru">3. Emacsのソースコードを入手する</a>
+            </li>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/emacs-install-for-ubuntu24-04/#4-birudozhuan-yong-deirekutoriwozuo-ru-osusume">4. ビルド専用ディレクトリを作る（おすすめ）</a>
+            </li>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/emacs-install-for-ubuntu24-04/#5-configurewoshi-xing-birudoshe-ding">5. configureを実行（ビルド設定）</a>
+            </li>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/emacs-install-for-ubuntu24-04/#6-make-konpairu">6. make（コンパイル）</a>
+            </li>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/emacs-install-for-ubuntu24-04/#7-make-install-insutoru">7. make install（インストール）</a>
+            </li>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/emacs-install-for-ubuntu24-04/#8-insutoruque-ren">8. インストール確認</a>
+            </li>
+            
+            <li>
+              <a href="https://satbunch.github.io/myblog/article/emacs-install-for-ubuntu24-04/#9-insutoruhou-nopointo">9. インストール後のポイント</a>
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        <li>
+          <a href="https://satbunch.github.io/myblog/article/emacs-install-for-ubuntu24-04/#clipboard-matome-komandoyi-lan">📋 まとめ（コマンド一覧）</a>
+          
+        </li>
+        
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="article-content">
+    <h1 id="ubuntu-24-04deemacszui-xin-ban-wososukarainsutorusuru-neiteibukonpairudui-ying">Ubuntu 24.04でEmacs最新版をソースからインストールする（ネイティブコンパイル対応）</h1>
+<p>こんにちは！
+この記事では、<strong>Ubuntu 24.04</strong>に<strong>最新版のEmacs</strong>を<strong>ソースコードからインストール</strong>する手順をまとめます。
+特に最近重要になっている<strong>ネイティブコンパイル（Native Compilation）対応</strong>のビルド方法も含みます！</p>
+<blockquote>
+<p>対象読者：Ubuntu 24.04を使っていて、apt版より新しいEmacsを使いたい人
+難易度：中級（ビルド経験が少しでもあれば大丈夫！）</p>
+</blockquote>
+<h2 id="1-hazimeni-aptban-dehadamenano">1. はじめに（apt版ではダメなの？）</h2>
+<p>Ubuntu 24.04のaptリポジトリにもEmacsはありますが、</p>
+<ul>
+<li>バージョンが古いことがある</li>
+<li>ネイティブコンパイル対応が不完全な場合がある</li>
+</ul>
+<p>ため、<strong>ソースから自分でビルドする</strong>ことで、</p>
+<ul>
+<li>最新版Emacs</li>
+<li>ネイティブコンパイル対応</li>
+<li>起動・動作の高速化
+が実現できます！</li>
+</ul>
+<h2 id="2-bi-yao-nakai-fa-turuwoinsutorusuru">2. 必要な開発ツールをインストールする</h2>
+<p>まずはビルドに必要なツールとライブラリをまとめてインストールします。</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">sudo</span><span> apt update
+</span><span style="color:#bf616a;">sudo</span><span> apt install</span><span style="color:#bf616a;"> -y</span><span> build-essential libgccjit-13-dev gcc-13 g++-13 \
+</span><span>libjansson-dev libjpeg-dev libpng-dev libtiff-dev libgif-dev libxpm-dev \
+</span><span>libncurses-dev libgtk-3-dev libxaw7-dev libxft-dev libmagickwand-dev \
+</span><span>libtree-sitter-dev librsvg2-dev
+</span></code></pre>
+<blockquote>
+<p>✏️ ポイント：</p>
+<ul>
+<li><code>gcc-13</code> + <code>libgccjit-13-dev</code> が揃っていれば、<strong>ネイティブコンパイル</strong>が有効になります！</li>
+<li>これにより、Emacsが内部的に高速な<code>.eln</code>ファイルを生成できるようになります。</li>
+</ul>
+</blockquote>
+<h2 id="3-emacsnososukodoworu-shou-suru">3. Emacsのソースコードを入手する</h2>
+<p><strong>Emacs公式サイト</strong>から最新版ソースコードをダウンロードします。</p>
+<ul>
+<li><a href="https://ftp.gnu.org/gnu/emacs/">GNU Emacs公式ダウンロードページ</a></li>
+</ul>
+<p>上記リンクから</p>
+<ul>
+<li><strong>最新版の <code>.tar.gz</code> ファイル</strong>（例：<code>emacs-30.1.tar.gz</code>）
+をダウンロードしてください。</li>
+</ul>
+<p>ダウンロードしたら、ターミナルで解凍します。</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#96b5b4;">cd </span><span style="color:#bf616a;">~</span><span>/Downloads
+</span><span style="color:#bf616a;">tar</span><span> xvf emacs-30.1.tar.gz
+</span><span style="color:#96b5b4;">cd</span><span> emacs-30.1
+</span></code></pre>
+<h2 id="4-birudozhuan-yong-deirekutoriwozuo-ru-osusume">4. ビルド専用ディレクトリを作る（おすすめ）</h2>
+<p>ビルドファイルをソースと分けるため、専用ディレクトリを作ります。</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">mkdir</span><span> build
+</span><span style="color:#96b5b4;">cd</span><span> build
+</span></code></pre>
+<p>これによりソースツリーがきれいなままビルドできます！</p>
+<h2 id="5-configurewoshi-xing-birudoshe-ding">5. configureを実行（ビルド設定）</h2>
+<p><strong>gcc-13を指定してネイティブコンパイルを有効化</strong>します。</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">CC</span><span>=</span><span style="color:#a3be8c;">gcc-13 </span><span style="color:#bf616a;">CXX</span><span>=</span><span style="color:#a3be8c;">g++-13 </span><span style="color:#bf616a;">../configure --with-native-compilation
+</span></code></pre>
+<p>✅ 成功すれば最後に <code>Configuration done.</code> と表示されます。</p>
+<h2 id="6-make-konpairu">6. make（コンパイル）</h2>
+<p>CPUコアをフル活用して高速ビルドします。</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">make -j</span><span>$</span><span style="color:#bf616a;">(nproc)
+</span></code></pre>
+<h2 id="7-make-install-insutoru">7. make install（インストール）</h2>
+<p>ビルドが完了したら、管理者権限でインストールします。</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">sudo</span><span> make install
+</span></code></pre>
+<p>デフォルトでは <code>/usr/local/bin/emacs</code> にインストールされます。</p>
+<h2 id="8-insutoruque-ren">8. インストール確認</h2>
+<p>インストールできたか確認しましょう。</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">emacs --version
+</span></code></pre>
+<p>例：</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>GNU Emacs 30.1
+</span></code></pre>
+<p>と出れば成功です！</p>
+<h2 id="9-insutoruhou-nopointo">9. インストール後のポイント</h2>
+<ul>
+<li>この手順でインストールしたEmacsは、ネイティブコンパイル（.elnファイル）対応版です。</li>
+<li>Emacsの起動後、自動的に<code>.eln</code>ファイルが生成されるため、起動・動作が非常に高速になります。</li>
+<li><code>/usr/bin/emacs</code> に古いapt版が残っていても、パス優先順位により <code>/usr/local/bin/emacs</code> が使われます。（通常問題なし）</li>
+</ul>
+<h1 id="clipboard-matome-komandoyi-lan">📋 まとめ（コマンド一覧）</h1>
+<table><thead><tr><th style="text-align: left">ステップ</th><th style="text-align: left">コマンド例</th></tr></thead><tbody>
+<tr><td style="text-align: left">パッケージインストール</td><td style="text-align: left"><code>sudo apt install build-essential libgccjit-13-dev gcc-13 g++-13 ...</code></td></tr>
+<tr><td style="text-align: left">ソース解凍</td><td style="text-align: left"><code>tar xvf emacs-30.1.tar.gz &amp;&amp; cd emacs-30.1</code></td></tr>
+<tr><td style="text-align: left">ビルド用ディレクトリ作成</td><td style="text-align: left"><code>mkdir build &amp;&amp; cd build</code></td></tr>
+<tr><td style="text-align: left">configure</td><td style="text-align: left"><code>CC=gcc-13 CXX=g++-13 ../configure --with-native-compilation</code></td></tr>
+<tr><td style="text-align: left">make</td><td style="text-align: left"><code>make -j$(nproc)</code></td></tr>
+<tr><td style="text-align: left">make install</td><td style="text-align: left"><code>sudo make install</code></td></tr>
+<tr><td style="text-align: left">バージョン確認</td><td style="text-align: left"><code>emacs --version</code></td></tr>
+</tbody></table>
+<blockquote>
+<p>この記事はchatGPTを使用して書きました。筆者も実際にこの手順でインストールできたので大丈夫だと思いますが、もしビルドに失敗したなどがありましたら、コメントを残していただければ幸いです。</p>
+</blockquote>
+
+  </div>
+</article>
+
+      </main>
+    </div>
+  </div>
+</body>
+
+</html>
