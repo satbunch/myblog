@@ -1,5 +1,6 @@
 +++
 title = "Obsidianで新規ノートに自動でフロントマターを挿入する方法"
+template = "article/page.html"
 date = "2025-05-16"
 +++
 

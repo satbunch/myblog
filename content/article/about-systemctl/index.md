@@ -1,6 +1,7 @@
 +++
 title = "systemctlについて"
 date = "2025-05-02"
+template = "article/page.html"
 +++
 
 # systemctlコマンド
